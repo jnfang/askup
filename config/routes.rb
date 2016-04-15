@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  # Mount Dce-lti links
+  mount DceLti::Engine => "/lti"
+
   devise_for :users
   # this needs to appear before `resources :questions` block so it overrides questions#index
   # todo: is it possible to not have the duplicated questions/ route?

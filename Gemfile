@@ -12,6 +12,10 @@ gem 'figaro'
 gem 'thumbs_up', github: 'bouchard/thumbs_up', ref: 'f499a7'
 gem 'ledermann-rails-settings'
 
+# Canvas integration gems
+gem 'dce_lti'
+gem 'activerecord-session_store', '~> 0.1.1'
+
 # Use SCSS, bootstrap, and Jquery for client-side code
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 4.0.3'
