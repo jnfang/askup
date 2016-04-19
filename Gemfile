@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.1.4'
 
 gem 'rails', '4.1.4'
 gem 'thin'  # one option for app server
@@ -11,6 +10,7 @@ gem 'devise'
 gem 'figaro'
 gem 'thumbs_up', github: 'bouchard/thumbs_up', ref: 'f499a7'
 gem 'ledermann-rails-settings'
+gem 'dce_lti'
 
 # Use SCSS, bootstrap, and Jquery for client-side code
 gem 'bootstrap-sass'

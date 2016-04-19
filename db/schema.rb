@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107040532) do
+ActiveRecord::Schema.define(version: 20160419202613) do
 
   create_table "answers", force: true do |t|
     t.datetime "created_at"
@@ -22,6 +22,41 @@ ActiveRecord::Schema.define(version: 20160107040532) do
   end
 
   add_index "answers", ["creator_id"], name: "index_answers_on_creator_id"
+
+  create_table "dce_lti_nonces", force: true do |t|
+    t.string   "nonce"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dce_lti_nonces", ["nonce"], name: "index_dce_lti_nonces_on_nonce", unique: true
+
+  create_table "dce_lti_users", force: true do |t|
+    t.string   "lti_user_id"
+    t.string   "lis_person_contact_email_primary"
+    t.string   "lis_person_name_family"
+    t.string   "lis_person_name_full"
+    t.string   "lis_person_name_given"
+    t.string   "lis_person_sourcedid"
+    t.string   "user_image"
+    t.string   "roles",                            default: "--- []\n"
+    t.string   "email",                            default: "",            null: false
+    t.string   "encrypted_password",               default: "",            null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                    default: 0,             null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "role",                             default: "contributor"
+    t.integer  "org_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "qsets", force: true do |t|
     t.string  "name"
@@ -36,6 +71,16 @@ ActiveRecord::Schema.define(version: 20160107040532) do
     t.integer  "qset_id"
   end
 
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
   create_table "settings", force: true do |t|
     t.string   "var",         null: false
     t.text     "value"
@@ -48,12 +93,12 @@ ActiveRecord::Schema.define(version: 20160107040532) do
   add_index "settings", ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",            null: false
-    t.string   "encrypted_password",     default: "",            null: false
+    t.string   "email",                            default: "",            null: false
+    t.string   "encrypted_password",               default: "",            null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,             null: false
+    t.integer  "sign_in_count",                    default: 0,             null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -62,8 +107,16 @@ ActiveRecord::Schema.define(version: 20160107040532) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "role",                   default: "contributor"
+    t.string   "role",                             default: "contributor"
     t.integer  "org_id"
+    t.string   "lti_user_id"
+    t.string   "lis_person_contact_email_primary"
+    t.string   "lis_person_name_family"
+    t.string   "lis_person_name_full"
+    t.string   "lis_person_name_given"
+    t.string   "lis_person_sourcedid"
+    t.string   "user_image"
+    t.string   "roles",                            default: "--- []\n"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

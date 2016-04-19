@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  DceLti::User = User
 
   devise_for :users
   # this needs to appear before `resources :questions` block so it overrides questions#index
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :qsets
+
+  mount DceLti::Engine => '/lti'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
