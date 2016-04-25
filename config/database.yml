@@ -6,8 +6,7 @@ default: &default
 
 development:
   <<: *default
-  database: askup_development
-  adapter: sqlite3
+  database: askup_development_dcelti_devise
 
 test:
   <<: *default
